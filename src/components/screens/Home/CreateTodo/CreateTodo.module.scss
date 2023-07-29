@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/vars.scss';
+
+.body {
+	display: flex;
+	border: 2px dashed $colorWhite;
+	border-radius: 20px;
+	height: 100px;
+	margin: 25px 150px;
+	cursor: pointer;
+
+	.plus {
+		height: 50px;
+		width: 50px;
+		border: 2px solid $colorWhite;
+		border-radius: 10px;
+		background: url(../../../../assets/images/plus.svg);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 100% 100%;
+		margin: auto 20px;
+	}
+	p {
+		font-size: $h3h;
+		font-weight: $h3w;
+		margin: auto 0;
+	}
+}

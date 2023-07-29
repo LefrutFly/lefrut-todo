@@ -1,0 +1,94 @@
+@import '../../../assets/styles/vars.scss';
+
+.body {
+	display: flex;
+	background: $colorGray;
+	border-radius: 20px;
+	min-height: 100px;
+	border: 2px solid $colorGold;
+	margin-bottom: 25px;
+	margin-top: 25px;
+	margin-inline: 5px;
+
+	.checkMark {
+		min-height: 50px;
+		min-width: 50px;
+		border: 2px solid rgba($color: $colorWhite, $alpha: 0.5);
+		border-radius: 10px;
+		background: url(../../../assets/images/check-mark.svg);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-size: 100% 100%;
+		margin: auto 20px;
+		cursor: pointer;
+		opacity: 0.5;
+		transition: background-image 0.3s ease-in-out;
+	}
+
+	.checked {
+		min-height: 50px;
+		min-width: 50px;
+		border: 2px solid $colorWhite;
+		border-radius: 10px;
+		margin: auto 20px;
+		cursor: pointer;
+		transition: background-image 0.3s ease-in-out;
+	}
+
+	.text {
+		display: block;
+		margin: auto 0px;
+
+		.header {
+			padding-top: 15px;
+			padding-bottom: 5px;
+			p {
+				font-size: $h2h;
+				font-weight: $h2w;
+			}
+		}
+
+		.description {
+			padding-bottom: 15px;
+			p {
+				font-size: $h3h;
+				font-weight: $h3w;
+			}
+		}
+	}
+
+	.crossedOutText {
+		text-decoration: line-through;
+		color: rgba($color: $colorWhite, $alpha: 0.5);
+	}
+
+	.leftPanel {
+		display: flex;
+		margin: auto 20px auto auto;
+
+		.change {
+			min-height: 30px;
+			min-width: 30px;
+			background: url(../../../assets/images/change.svg);
+			background-repeat: no-repeat;
+			background-position: 0 0;
+			background-size: 100% 100%;
+			cursor: pointer;
+		}
+
+		.delete {
+			margin-left: 20px;
+			min-height: 30px;
+			min-width: 30px;
+			background: url(../../../assets/images/trash-can.svg);
+			background-repeat: no-repeat;
+			background-position: 0 0;
+			background-size: 100% 100%;
+			cursor: pointer;
+		}
+	}
+
+	.crossedOut {
+		opacity: 0.5;
+	}
+}
