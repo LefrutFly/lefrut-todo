@@ -1,12 +1,12 @@
 import React from 'react'
 import style from './CreateTodo.module.scss'
 
-interface CreateTodoButtonProps {
+interface ICreateTodoButtonProps {
 	onClick: () => void
 	isShowChangeTodoWindow: boolean
 }
 
-const CreateTodoButton: React.FC<CreateTodoButtonProps> = ({
+const CreateTodoButton: React.FC<ICreateTodoButtonProps> = ({
 	onClick,
 	isShowChangeTodoWindow,
 }) => {

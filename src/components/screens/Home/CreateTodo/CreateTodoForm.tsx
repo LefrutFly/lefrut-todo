@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 import CreateNewTodo from '../../../ui/ChangeWindow/CreateNewTodo'
 
-interface CreateTodoFormProps {
+interface ICreateTodoFormProps {
 	isVisible: boolean
 }
 
-const CreateTodoForm: React.FC<CreateTodoFormProps> = ({ isVisible }) => {
+const CreateTodoForm: FC<ICreateTodoFormProps> = ({ isVisible }) => {
 	return <>{isVisible && <CreateNewTodo />}</>
 }
 

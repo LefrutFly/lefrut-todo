@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import CreateTodoButton from './CreateTodoButton'
 import CreateTodoForm from './CreateTodoForm'
 
-const CreateTodo: React.FC = () => {
+const CreateTodo = () => {
 	const [isShowChangeTodoWindow, setShowChangeTodoWindow] = useState(false)
 
 	const openChangeTodoWindow = () => {
