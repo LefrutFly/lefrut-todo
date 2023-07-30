@@ -11,8 +11,6 @@ interface IChangeTodoWindow {
 	register: UseFormRegister<ITodo>
 	handleSubmit: UseFormHandleSubmit<ITodo, undefined>
 	changeTodo: SubmitHandler<ITodo>
-	contentTitle: string
-	contentDescription: string
 	requiredHeader: boolean
 	requiredDescription: boolean
 }
@@ -21,8 +19,6 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 	register,
 	handleSubmit,
 	changeTodo,
-	contentTitle,
-	contentDescription,
 	requiredHeader,
 	requiredDescription,
 }) => {
@@ -50,7 +46,6 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 						{...register('header', { required: requiredHeader })}
 						placeholder='Enter a title for your task here'
 						onChange={handleInputHeaderChange}
-						// defaultValue={contentTitle}
 					/>
 					<label
 						htmlFor='header'
@@ -67,7 +62,6 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 						{...register('description', { required: requiredDescription })}
 						placeholder='Enter a description for your task here'
 						onChange={handleInputDescriptionChange}
-						// defaultValue={contentDescription}
 						rows={6}
 					/>
 					<label

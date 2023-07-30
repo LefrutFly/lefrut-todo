@@ -15,8 +15,6 @@ const CreateNewTodo = () => {
 			register={register}
 			handleSubmit={handleSubmit}
 			changeTodo={createTodo}
-			contentTitle={''}
-			contentDescription={''}
 			requiredHeader={true}
 			requiredDescription={true}
 		/>
