@@ -1,8 +1,12 @@
-import { FC, useState } from 'react'
-import { TodoService } from '../../../services/todo.service'
+import { FC } from 'react'
+import { useCheckMark } from '../../../hooks/useCheckMark'
+import { useSetWindow } from '../../../hooks/useSetWindow'
 import { ITodo } from '../../../types/todo.interface'
 import UpdateTodo from '../ChangeWindow/UpdateTodo'
 import style from './TodoCard.module.scss'
+import TodoCardChangeBlock from './TodoCardChangeBlock'
+import TodoCardCheckMark from './TodoCardCheckMark'
+import TodoCardTextBlock from './TodoCardTextBlock'
 
 interface TodoCardProps {
 	data: ITodo
@@ -10,56 +14,24 @@ interface TodoCardProps {
 }
 
 const TodoCard: FC<TodoCardProps> = ({ data, onDeleteTodo }) => {
-	const [isChecked, setIsChecked] = useState<boolean>(data.isCompleted)
+	const { isChecked, handleClickOnCheckMark } = useCheckMark(data)
 
-	const handleClickOnCheckMark = async () => {
-		const newIsChecked = !isChecked
-		setIsChecked(newIsChecked)
-
-		await TodoService.updateById(data.id, {
-			...data,
-			isCompleted: newIsChecked,
-		})
-	}
-
-	const handleClickDeleteTodo = async () => {
-		await TodoService.deleteById(data.id)
-		onDeleteTodo()
-	}
-
-	const [isShowWindow, setWindow] = useState(false)
-
-	const handleClickUpdateTodo = () => {
-		setWindow(!isShowWindow)
-	}
-
-	const closeWindow = () => {
-		setWindow(false)
-	}
+	const { handleClickUpdateTodo, closeWindow, isShowWindow } = useSetWindow()
 
 	return (
 		<>
 			<div className={style.body}>
-				<div
-					className={isChecked ? style.checkMark : style.checked}
-					onClick={handleClickOnCheckMark}
-				></div>
-				<div
-					className={`${style.text} ${isChecked ? style.crossedOutText : ''}`}
-				>
-					<div className={style.header}>
-						<p>{data.header}</p>
-					</div>
-					<div className={style.description}>
-						<p>{data.description}</p>
-					</div>
-				</div>
-				<div
-					className={`${style.leftPanel} ${isChecked ? style.crossedOut : ''}`}
-				>
-					<div className={style.change} onClick={handleClickUpdateTodo}></div>
-					<div className={style.delete} onClick={handleClickDeleteTodo}></div>
-				</div>
+				<TodoCardCheckMark
+					isChecked={isChecked}
+					handleClickOnCheckMark={handleClickOnCheckMark}
+				/>
+				<TodoCardTextBlock data={data} isChecked={isChecked} />
+				<TodoCardChangeBlock
+					isChecked={isChecked}
+					handleClickUpdateTodo={handleClickUpdateTodo}
+					data={data}
+					onDeleteTodo={onDeleteTodo}
+				/>
 			</div>
 			{isShowWindow && <UpdateTodo id={data.id} closeWindow={closeWindow} />}
 		</>
