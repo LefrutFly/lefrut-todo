@@ -3,18 +3,16 @@ import { useMutation, useQueryClient } from 'react-query'
 import { TodoService } from '../services/todo.service'
 import { ITodo } from '../types/todo.interface'
 
-export const useUpdateTodo = (reset: UseFormReset<ITodo>) => {
+export const useUpdateTodo = (
+	reset: UseFormReset<ITodo>,
+	id: number,
+	close: () => void
+) => {
 	const queryClient = useQueryClient()
 
 	const { mutate } = useMutation(
 		['update todo'],
-		(data: ITodo) =>
-			TodoService.updateById(data.id, {
-				header: 'работает ли?',
-				description: 'ааа?',
-				isCompleted: false,
-				id: data.id,
-			}),
+		(data: ITodo) => TodoService.updateById(id, data),
 		{
 			onSuccess: () => {
 				queryClient.invalidateQueries(['todos'])
@@ -25,6 +23,7 @@ export const useUpdateTodo = (reset: UseFormReset<ITodo>) => {
 
 	const updateTodo: SubmitHandler<ITodo> = data => {
 		mutate(data)
+		close()
 	}
 
 	return { updateTodo }

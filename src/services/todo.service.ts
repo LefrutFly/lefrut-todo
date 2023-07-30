@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ITodo, ITodoData } from '../types/todo.interface'
+import { ITodo } from '../types/todo.interface'
 
 export const TodoService = {
 	async getAll() {
@@ -8,9 +8,9 @@ export const TodoService = {
 		return data
 	},
 	async getById(id: number) {
-		const data = await this.getAll()
+		const response = await axios.get(`http://localhost:3000/todos?id=${id}`)
 
-		return data.data[id - 1]
+		return response.data[0]
 	},
 	async deleteById(id: number) {
 		try {
@@ -32,18 +32,20 @@ export const TodoService = {
 		}
 	},
 	async updateById(id: number, updatedTodo: ITodo) {
-		try {
-			const exists = await this.checkExistsComponentByID(id)
-
-			if (exists) {
-				await axios.put(`http://localhost:3000/todos/${id}`, updatedTodo)
-			}
-		} catch (error) {
-			console.error('Ошибка при обновлении задачи:', error)
-		}
+		return axios
+			.put(`http://localhost:3000/todos/${id}`, updatedTodo)
+			.catch(function (error) {
+				console.log(error)
+			})
 	},
-	async createNew(data: ITodoData) {
-		const newData = { ...data, isCompleted: false }
+	async createNew(data: ITodo) {
+		const newData: ITodo = {
+			id: data.id,
+			header: data.header,
+			description: data.description,
+			isCompleted: false,
+		}
+
 		try {
 			const response = await axios.post<ITodo>(
 				'http://localhost:3000/todos',

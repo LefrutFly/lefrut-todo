@@ -7,21 +7,28 @@ import ChangeTodoWindow from './ChangeTodoWindow'
 
 interface IUpdateTodoProps {
 	id: number
+	closeWindow: () => void
 }
 
-const UpdateTodo: FC<IUpdateTodoProps> = ({ id }) => {
-	const { register, reset, handleSubmit } = useForm<ITodo>({
-		mode: 'onChange',
-	})
-
-	const { updateTodo } = useUpdateTodo(reset)
-
+const UpdateTodo: FC<IUpdateTodoProps> = ({ id, closeWindow }) => {
 	const [todo, setTodo] = useState<ITodo>({
 		header: '',
 		description: '',
 		isCompleted: false,
 		id: id,
 	})
+
+	const { register, reset, handleSubmit, setValue } = useForm<ITodo>({
+		mode: 'onChange',
+	})
+	useEffect(() => {
+		setValue('header', todo.header)
+	}, [todo.header])
+	useEffect(() => {
+		setValue('description', todo.description)
+	}, [todo.description])
+
+	const { updateTodo } = useUpdateTodo(reset, id, closeWindow)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -40,6 +47,8 @@ const UpdateTodo: FC<IUpdateTodoProps> = ({ id }) => {
 			changeTodo={updateTodo}
 			contentTitle={todo.header}
 			contentDescription={todo.description}
+			requiredHeader={false}
+			requiredDescription={false}
 		/>
 	)
 }

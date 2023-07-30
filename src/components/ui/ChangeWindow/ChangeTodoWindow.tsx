@@ -13,6 +13,8 @@ interface IChangeTodoWindow {
 	changeTodo: SubmitHandler<ITodo>
 	contentTitle: string
 	contentDescription: string
+	requiredHeader: boolean
+	requiredDescription: boolean
 }
 
 const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
@@ -21,6 +23,8 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 	changeTodo,
 	contentTitle,
 	contentDescription,
+	requiredHeader,
+	requiredDescription,
 }) => {
 	const [headerInput, setHeaderInput] = useState<string>('')
 
@@ -43,10 +47,10 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 					<input
 						id='header'
 						className={style.inputHeader}
-						{...register('header', { required: true })}
+						{...register('header', { required: requiredHeader })}
 						placeholder='Enter a title for your task here'
 						onChange={handleInputHeaderChange}
-						defaultValue={contentTitle}
+						// defaultValue={contentTitle}
 					/>
 					<label
 						htmlFor='header'
@@ -60,10 +64,10 @@ const ChangeTodoWindow: FC<IChangeTodoWindow> = ({
 					<textarea
 						id='description'
 						className={style.inputDescription}
-						{...register('description', { required: true })}
+						{...register('description', { required: requiredDescription })}
 						placeholder='Enter a description for your task here'
 						onChange={handleInputDescriptionChange}
-						defaultValue={contentDescription}
+						// defaultValue={contentDescription}
 						rows={6}
 					/>
 					<label

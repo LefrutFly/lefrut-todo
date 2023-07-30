@@ -17,6 +17,8 @@ const CreateNewTodo = () => {
 			changeTodo={createTodo}
 			contentTitle={''}
 			contentDescription={''}
+			requiredHeader={true}
+			requiredDescription={true}
 		/>
 	)
 }

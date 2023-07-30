@@ -33,6 +33,10 @@ const TodoCard: FC<TodoCardProps> = ({ data, onDeleteTodo }) => {
 		setWindow(!isShowWindow)
 	}
 
+	const closeWindow = () => {
+		setWindow(false)
+	}
+
 	return (
 		<>
 			<div className={style.body}>
@@ -57,7 +61,7 @@ const TodoCard: FC<TodoCardProps> = ({ data, onDeleteTodo }) => {
 					<div className={style.delete} onClick={handleClickDeleteTodo}></div>
 				</div>
 			</div>
-			{isShowWindow && <UpdateTodo id={data.id} />}
+			{isShowWindow && <UpdateTodo id={data.id} closeWindow={closeWindow} />}
 		</>
 	)
 }
